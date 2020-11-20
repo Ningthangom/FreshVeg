@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="signup.css">
+
+    <title>ASNY SIGN UP PAGE</title>
+</head>
+<body>
+            <!-- Image and text -->
+    <nav class="navbar navbar-light bg-primary">
+        <a class="navbar-brand" href="#">
+          <img src="logo.png" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
+          FreshVeg
+        </a>
+      </nav>
+      <form class="SignUpForm">
+        <div class="form-row">
+          <div class="col-sm-4 mb-3">
+            <label for="validationDefault01">First name</label>
+            <input type="text" class="form-control" id="validationDefault01" placeholder="First name" value="Mark" required>
+          </div>
+          <div class="col-sm-4 mb-3">
+            <label for="validationDefault02">Last name</label>
+            <input type="text" class="form-control" id="validationDefault02" placeholder="Last name" value="Otto" required>
+          </div>
+          <div class="col-sm-4 mb-3">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-sm-6 mb-3">
+            <label for="inputPassword6">Password</label>
+            <input type="password" id="inputPassword6" class="form-control" aria-describedby="passwordHelpInline">
+            <small id="passwordHelpInline" class="text-muted">
+              Must be 8-20 characters long.
+            </small>
+          </div>
+          <div class="col-sm-6 mb-3">
+            <label for="inputPassword6"> Comfirm Password</label>
+            <input type="password" id="comfirmpassword" class="form-control mx-md-3" aria-describedby="passwordHelpInline">
+            <small id="passwordHelpInline" class="text-muted">
+          </div>
+          </div>
+        </div>
+        <div class="form-row">
+              <div class="col-auto">
+                <label class="mr-md-2" for="inlineFormCustomSelect"><span id="Iam">I am</span> </label>
+                <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                  <option selected>Choose...</option>
+                  <option value="1">A grower</option>
+                  <option value="2">A buyer</option>
+                </select>
+              </div>
+        </div>
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
+            <label class="form-check-label" for="invalidCheck2">
+              Agree to terms and conditions
+            </label>
+          </div>
+        </div>
+        <button class="btn btn-primary" type="submit">Let's go</button>
+      </form>
+
+  
+  
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</body>
+</html>

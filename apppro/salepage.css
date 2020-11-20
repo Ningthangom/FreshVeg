@@ -1,0 +1,19 @@
+
+.contain1{
+    background-color: yellowgreen;
+    height: 100px;
+    text-align: left;
+    margin: 50px;
+    align-items: center;
+}
+
+.quantityInput {
+    width: 100px;
+}
+.priceInput {
+    width: 150px;
+
+}
+.dateInput{
+    width: 150px;
+}

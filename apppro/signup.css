@@ -1,0 +1,53 @@
+.SignUpForm {
+    width: 65%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
+   /*  border: solid red;*/
+} 
+
+/* .footer{
+    width: 100%;
+    position:fixed;
+    bottom: 0%;
+    background-color: teal;
+} */
+
+#Iam{
+    color: whitesmoke;
+    font-size: medium;
+
+}
+@media screen and (max-width: 1024px) {
+    body {
+      background-color: lightblue;
+      background-image: url("freshvege.jpeg");
+
+
+    }
+
+
+    .SignUpForm{
+        background-color: black;
+        width: 95%;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        color: white;
+        padding: 10%;
+        padding-top: 2%;
+    
+    }
+       .form-check{
+           padding: 5%;
+       }
+
+      
+    .forgot{
+        padding-top: 10%;
+        margin-top: 10%;
+        color: whitesmoke;
+    }
+  }
