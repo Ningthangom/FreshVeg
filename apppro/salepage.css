@@ -6,14 +6,46 @@
     margin: 50px;
     align-items: center;
 }
-
+.contain2 {
+    margin: 20px;
+    border: solid red;
+    text-align: left;
+    align-items: center;
+}
 .quantityInput {
-    width: 100px;
+    width: 150px;
+    position: absolute;
+  left: 100px;
+  top: -20px;
+
+}
+.contain3 {
+    margin: 20px;
+    border: solid red;
+
 }
 .priceInput {
     width: 150px;
+    margin: 20px;
+    position: absolute;
+    left: 78px;
 
 }
+.contain4 {
+    margin: 20px;
+    border: solid red;
+    align-items: center;
+}
 .dateInput{
-    width: 150px;
+    width: 180px;
+    position: absolute;
+    left: 89px;
+    top: 19px;
+}
+
+body {
+    background-color: black;
+    color: wheat;
+    font-style: italic;
+    align-items: center;
 }
