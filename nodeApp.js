@@ -152,10 +152,118 @@ function run() {
                     })
                 }
             })
-        });
-        
-        
+        });  
     };
 
+    function addNew() {
+        let queryString = "SELECT id, produce_type FROM produce_type";
+        connection.query(queryString, function(err, res) {
+            if (err) throw err;
+
+            inquirer.prompt([
+                {
+                    type: "list",
+                    name: "vegSelector",
+                    message: "What type of veg are you adding",
+                    choices: 
+                        function() {
+                            let produceArray = [];
+                            for (let i = 0; i < res.length; i++) {
+                                produceArray.push(`${res[i].id} ${res[i].produce_type}`);
+                            };
+                            return produceArray;
+                        }
+                },
+                {
+                    type: "input",
+                    name: "vegName",
+                    message: "What are you adding?" 
+                },
+                {
+                    type: "input",
+                    name: "vegFarm",
+                    message: "Where is it From?"
+                },
+                {
+                    type: "list",
+                    name: "vegState",
+                    message: "What state is your farm in?",
+                    choices: [
+                        "QLD",
+                        "NSW",
+                        "VIC",
+                        "SA",
+                        "NT",
+                        "WA",
+                        "TAS",
+                        "ACT"
+                    ]
+                },
+                {
+                    type: "input",
+                    name: "vegAmount",
+                    message: "How much do you have available?"
+                }
+            ]).then(function(data) {
+                let vegLocation = `${data.vegFarm} ${data.vegState}`;
+                let vegType = JSON.stringify(data.vegSelector);
+                let vegId = vegType.slice(1,3);
+                console.log(vegId);
+                if (data.vegSelector) {
+                    let queryStringProduce = `INSERT INTO fresh_produce (produce_name, farm_location, Amount_kg, produce_type_id) VALUES ('${data.vegName}', '${vegLocation}', '${data.vegAmount}', ${vegId})`;
+
+                    connection.query(queryStringProduce, function(err, res) {
+                        if (err) throw err;
+
+                        console.log("Success");
+
+                        inquirer.prompt([
+                            {
+                                type: "list",
+                                name: "mainMenu",
+                                message: "Return to main menu or view produce",
+                                choices: 
+                                [
+                                    "View Produce",
+                                    "Main Menu"
+                                ]
+                            }
+                        ]).then(function(data) {
+                            if (data.mainMenu === "View Produce") return seeAll();
+                            if (data.mainMenu === "Main Menu") return mainMenu();
+                        });
+                    });
+                };
+            });
+        });  
+    };
+
+    function removeDepleted() {
+        let queryString = "SELECT id, produce_name FROM fresh_produce";
+        connection.query(queryString, function(err, res) {
+            if (err) throw err;
+
+            inquirer.prompt([
+                {
+                    type: "list",
+                    name: "produce",
+                    message: "What produce is to be removed?",
+                    choices: 
+                    function() {
+                        let produceArray = [];
+                        for (let i = 0; i < res.length; i++) {
+                            produceArray.push(`${res[i].id} ${res[i].produce_name}`);
+                        };
+                        return produceArray;
+                    }
+                }
+            ]).then(function(data) {
+                if (data.produce) {
+                    connection.query(``)
+                }
+            })
+        })
+        
+    }
     mainMenu();
 };

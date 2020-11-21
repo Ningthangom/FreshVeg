@@ -1,0 +1,53 @@
+.log-in-form {
+    width: 65%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
+    border: solid red;
+}
+
+@media screen and (max-width: 1024px) {
+    body {
+      background-color: lightblue;
+      background-image: url("freshvege.jpeg");
+
+
+    }
+    .log-in-form{
+        width: 80%;
+        position: fixed;
+        top: 45%;
+        left: 55%;
+        /* bring your own prefixes */
+        transform: translate(-50%, -50%);
+        border: solid red;
+        background-color:black;
+        color: whitesmoke;
+        padding: 5%;
+    }
+
+    .page-footer{
+        width: 100%;
+        position:fixed;
+        bottom: 0%;
+        background-color: teal;
+    }
+    .footerASNY{
+        color:black;
+    }
+    /* .signUp{
+       position: fixed;
+       left: */
+       .form-check{
+           padding: 5%;
+       }
+
+      
+    .forgot{
+        padding-top: 10%;
+        margin-top: 10%;
+        color: whitesmoke;
+    }
+  }
