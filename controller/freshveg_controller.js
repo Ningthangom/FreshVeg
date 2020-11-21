@@ -15,8 +15,22 @@ router.get("/", (req, res) => {
     res.render("index", vegetableObject)
 });
 
+//Additional routes for other pages
 
-// Routes
+// route for an individual farmer's page
+router.get("/:farmer", (req, res) =>{
+    res.render("farmer")
+})
+
+//route for vegetables belonging to farmer
+
+router.get("/farmer/:vegetable", (req, res) =>{
+    //query farmer and veg
+    res.render("vegetable")
+})
+
+
+// API Routes
 // =====================================================
 
 module.exports = router;

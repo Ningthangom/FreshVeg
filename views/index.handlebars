@@ -1,20 +1,33 @@
-<body class= "container-fluid">
-    <!--First Row of the layout for Headline and other things-->
-    <div class= "row">
-    <!--main content and layout of the page listing different farmers and or vegetables-->
-        <main>
-        <!--Use a card tempalte in partials to load in cards for each farmers, not sure how this would look on the page but we can try and attempt it will need to look into partials to do it sucessfully-->
-        <!--#each farmer-->
-            <h2>Hello World!</h2>
-            <section class="col-12">
-                
-                    <article class="text-center">
-                        <p>YOU WISH TO BUY MY FRUIT? YES?</p><br>
-                        <p>TURNIP: 3.99/kg, BUNYIP 6.99/kg, whipyip $10 each</p>
-                    </article>
-            </section>
-        <!--/each-->
-        </main>
-    </div>
 
-</body>
+    <!--First Row of the layout for Headline and other things-->
+<div class= "row">
+    <!--main content and layout of the page listing different farmers and or vegetables-->
+
+    <!--Aside/Navbar-->
+        <aside class="col-sm-2">
+
+        </aside>
+        <!--Use a card tempalte in partials to load in cards for each farmers, not sure how this would look on the page but we can try and attempt it will need to look into partials to do it sucessfully-->
+        <div class="row">
+        <!--{{#each farmer}}-->
+            <section class="card" style="width: 18 rem; border: 1%;">
+
+                <article class="card-body">
+                    <h5 class="card-title">
+                        <!--Accessing Farmer company name{{company}}-->
+                        Brown's Farm Fresh Produce
+                    </h5>
+                        <p class="card-text">
+                            <!--{{full_name}}-->
+                            Farmer Brown
+                        </p>
+                        <a href="farmer" class="btn btn-primary">
+                            <!--{{brand_name}}-->
+                            Brown's Produce
+                        </a>
+                </article>
+            </section>
+        </div>
+        <!--/each-->
+    </main>
+</div>
