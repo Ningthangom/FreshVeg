@@ -65,7 +65,7 @@ function run() {
             {
                 type: "list",
                 name: "subMenu",
-                message: "Where too Next?.".green,
+                message: "Where to Next?.".green,
                 choices: [
                     " --> Main Menu",
                     " --> Filter Produce"
@@ -99,8 +99,6 @@ function run() {
                             currentProduce.push(res[i]);
                             
                         };
-                        console.log(produceArray);
-                        console.log(currentProduce);
                         return produceArray;
                     }
                 }
@@ -113,7 +111,7 @@ function run() {
                         {
                             type: "input",
                             name: "newAmount",
-                            message: "What is the new amount?"
+                            message: "What is the new amount(KG)?"
                         },
                         {
                             type: "list",
@@ -202,13 +200,14 @@ function run() {
                 {
                     type: "input",
                     name: "vegAmount",
-                    message: "How much do you have available?"
+                    message: "How much do you have available(KG)?"
                 }
             ]).then(function(data) {
+
                 let vegLocation = `${data.vegFarm} ${data.vegState}`;
                 let vegType = JSON.stringify(data.vegSelector);
                 let vegId = vegType.slice(1,3);
-                console.log(vegId);
+                
                 if (data.vegSelector) {
                     let queryStringProduce = `INSERT INTO fresh_produce (produce_name, farm_location, Amount_kg, produce_type_id) VALUES ('${data.vegName}', '${vegLocation}', '${data.vegAmount}', ${vegId})`;
 
@@ -258,12 +257,39 @@ function run() {
                     }
                 }
             ]).then(function(data) {
+                let produce = JSON.stringify(data.produce);
+                let produceString = produce.replace(/[^a-zA-Z ]/g, "");
+                let produceID = produce.replace(/[^0-9 ]/g, "");
+                console.log(produceString);
+                console.log(produceID);
                 if (data.produce) {
-                    connection.query(``)
-                }
-            })
-        })
-        
-    }
+                    connection.query(`DELETE FROM fresh_produce WHERE id = ${produceID}`,
+                        function(err, res) {
+                            if (err) throw err;
+
+                            console.log(`Successfully removed ${res} from database`);
+
+                        });
+                        inquirer.prompt([
+                            {
+                                type: "list",
+                                name: "mainMenu",
+                                message: "Return to main menu or view produce",
+                                choices: 
+                                [
+                                    "View Produce",
+                                    "Main Menu"
+                                ]
+                            }
+                        ]).then(function(data) {
+                            if (data.mainMenu === "View Produce") return seeAll();
+                            if (data.mainMenu === "Main Menu") return mainMenu();
+                        });
+                };
+            });
+        });
+    };
+
     mainMenu();
+    
 };
