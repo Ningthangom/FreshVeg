@@ -18,9 +18,8 @@ connection.connect(function(err) {
         return;
     }
     console.log(`Connected as id ${connection.threadId}`);
-});
- */
-
+}); */
+ 
  // Dependencies
 var Sequelize = require("sequelize");
 
@@ -38,4 +37,4 @@ Sequelize("sequelize_chirpy", "root", "Ning_thang_om_96", {
 });
 
 // Exports the connection for other files to use
-module.exports = sequelize;
+module.exports = sequelize; 
