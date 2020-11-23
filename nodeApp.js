@@ -46,7 +46,7 @@ function run() {
     }
 
     function seeAll() {
-        let queryString = "SELECT * FROM fresh_produce";
+        let queryString = "SELECT * FROM products";
         connection.query(queryString, function(err, res) {
             if (err) throw err;
 
@@ -80,8 +80,6 @@ function run() {
     };
 
     function updateLevels() {
-        
-        // let queryString = `UPDATE amount_kg FROM fresh_produce WHERE id = ${res}`
         connection.query(`SELECT * FROM fresh_produce`, function(err, res) {
             if (err) throw err;
 
@@ -291,5 +289,5 @@ function run() {
     };
 
     mainMenu();
-    
+
 };
