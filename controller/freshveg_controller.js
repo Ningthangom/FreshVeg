@@ -18,17 +18,20 @@ router.get("/", (req, res) => {
 //Additional routes for other pages
 
 // route for an individual farmer's page
-router.get("/:farmer", (req, res) =>{
+router.get("/farmer", (req, res) =>{
     res.render("farmer")
 })
 
 //route for vegetables belonging to farmer
 
-router.get("/farmer/:vegetable", (req, res) =>{
+router.get("/farmer/vegetable", (req, res) =>{
     //query farmer and veg
     res.render("vege")
 })
 
+router.get("/farmer/addvege", function(req, res) {
+    res.render("addvege")
+  });
 
 // API Routes
 // =====================================================
