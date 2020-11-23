@@ -1,0 +1,95 @@
+
+.contain{
+    background-color: yellowgreen;
+    height: 6rem;
+    margin: 2%;
+    text-align: left;
+   position: relative;
+   left: 2%;
+   right: 10%;
+}
+
+
+
+.contain1{
+    background-color: yellowgreen;
+    height: 6rem;
+    text-align: left;
+    margin: 2%;
+   position: relative;
+   left: 2%;
+   right: 10%;
+}
+.contain2 {
+    background-color: black;
+    margin: 2%;
+    height: 6rem;
+    align-items: center;
+    border: solid red;
+    position: relative;
+    left: 2%;
+    right: 10%;
+}
+#quantityInput{
+    margin: 4%;
+    position: relative;
+    top:12%;
+}
+.quantityInput {
+    width: 40%;        
+    margin: 5%;
+    position: relative;
+    left: 5%;
+   top: -1rem;
+
+}
+.contain3 {
+    background-color: black;
+    margin: 2%;
+    height: 6rem;
+    align-items: center;
+    border: solid red;
+    position: relative;
+    left: 2%;
+    right: 10%;
+
+}
+.priceInput {
+    width: 40%;        
+    margin: 5%;
+    position: relative;
+    left: 5%;
+   top: 1rem;
+
+}
+.contain4 {
+    background-color: black;
+    margin: 2%;
+    height: 6rem;
+    align-items: center;
+    border: solid red;
+    position: relative;
+    left: 2%;
+    right: 10%;
+}
+.dateInput{
+    width: 40%;
+    position: relative;
+    left: 2%;
+    top: 1.5rem;
+}
+
+#checkoutbtn {
+    width: 20rem;
+    position: relative;
+    left: 40%;
+   top: 20%;
+
+}
+body {
+    background-color: black;
+    color:white;
+    font-style: italic;
+    align-items: center;
+    background-image: url("/../../img/salesbackground.jpg");
+}

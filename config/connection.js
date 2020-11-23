@@ -1,4 +1,4 @@
-
+/* 
 let mysql = require("mysql");
 let connection;
 if (process.env.JAWSDB_URL) {
@@ -9,7 +9,7 @@ if (process.env.JAWSDB_URL) {
         port: 3306,
         user: "root",
         password: "Ning_thang_om_96",
-        database: "burgers_db"
+        database: "thjgsjh6mvck6pc7"
     });
 };
 connection.connect(function(err) {
@@ -19,3 +19,23 @@ connection.connect(function(err) {
     }
     console.log(`Connected as id ${connection.threadId}`);
 });
+ */
+
+ // Dependencies
+var Sequelize = require("sequelize");
+
+// Creates mySQL connection using Sequelize, the empty string in the third argument spot is our password.
+var sequelize = new 
+Sequelize("sequelize_chirpy", "root", "Ning_thang_om_96", {
+  host: "localhost",
+  port: 3306,
+  dialect: "mysql",
+  pool: {
+    max: 5,
+    min: 0,
+    idle: 10000
+  }
+});
+
+// Exports the connection for other files to use
+module.exports = sequelize;

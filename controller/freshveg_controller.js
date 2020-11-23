@@ -26,7 +26,7 @@ router.get("/:farmer", (req, res) =>{
 
 router.get("/farmer/:vegetable", (req, res) =>{
     //query farmer and veg
-    res.render("vegetable")
+    res.render("vege")
 })
 
 
