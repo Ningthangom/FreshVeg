@@ -2,13 +2,14 @@ const inquirer = require("inquirer");
 const table = require("console.table");
 const mysql = require("mysql");
 const colors = require("colors");
+// const sequelize = require("./config/sequelize");
 
 const connection = mysql.createConnection({
-    host: "localhost",
+    host: "tyduzbv3ggpf15sx.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
     port: "3306",
-    user: "root",
-    password: "qwerty1234",
-    database: "freshveg_db",
+    user: "rcp5kgnzh5w2y4w4",
+    password: "mr7txoqjdyittef0",
+    database: "thjgsjh6mvck6pc7",
 });
 
 connection.connect(function(err) {
@@ -80,7 +81,7 @@ function run() {
     };
 
     function updateLevels() {
-        connection.query(`SELECT * FROM fresh_produce`, function(err, res) {
+        connection.query(`SELECT * FROM products`, function(err, res) {
             if (err) throw err;
 
             inquirer.prompt([
@@ -109,7 +110,7 @@ function run() {
                         {
                             type: "input",
                             name: "newAmount",
-                            message: "What is the new amount(KG)?"
+                            message: "What is the new price per KG?"
                         },
                         {
                             type: "list",
@@ -122,7 +123,7 @@ function run() {
                         if (data.confirm === "No") return updateLevels();
                         if (data.confirm === "Exit") return mainMenu();
                         if (data.confirm === "Yes") {
-                            connection.query(`UPDATE fresh_produce SET amount_kg = ${data.newAmount} WHERE id = ${amountString}`, 
+                            connection.query(`UPDATE products SET price_kg = ${data.newAmount} WHERE id = ${amountString}`, 
                             function(err, res) {
                                 if (err) throw err;
 
@@ -152,24 +153,24 @@ function run() {
     };
 
     function addNew() {
-        let queryString = "SELECT id, produce_type FROM produce_type";
+        let queryString = "SELECT id, product_name FROM products";
         connection.query(queryString, function(err, res) {
             if (err) throw err;
 
             inquirer.prompt([
-                {
-                    type: "list",
-                    name: "vegSelector",
-                    message: "What type of veg are you adding",
-                    choices: 
-                        function() {
-                            let produceArray = [];
-                            for (let i = 0; i < res.length; i++) {
-                                produceArray.push(`${res[i].id} ${res[i].produce_type}`);
-                            };
-                            return produceArray;
-                        }
-                },
+                // {
+                //     type: "list",
+                //     name: "vegSelector",
+                //     message: "What type of veg are you adding",
+                //     choices: 
+                //         function() {
+                //             let produceArray = [];
+                //             for (let i = 0; i < res.length; i++) {
+                //                 produceArray.push(`${res[i].id} ${res[i].produce_type}`);
+                //             };
+                //             return produceArray;
+                //         }
+                // },
                 {
                     type: "input",
                     name: "vegName",
@@ -177,8 +178,8 @@ function run() {
                 },
                 {
                     type: "input",
-                    name: "vegFarm",
-                    message: "Where is it From?"
+                    name: "vegID",
+                    message: "Whats your farmer ID?"
                 },
                 {
                     type: "list",
@@ -198,39 +199,61 @@ function run() {
                 {
                     type: "input",
                     name: "vegAmount",
-                    message: "How much do you have available(KG)?"
+                    message: "What does it cost per KG?"
                 }
             ]).then(function(data) {
-
-                let vegLocation = `${data.vegFarm} ${data.vegState}`;
-                let vegType = JSON.stringify(data.vegSelector);
-                let vegId = vegType.slice(1,3);
+                console.log(data);
+                // let vegLocation = `${data.vegFarm} ${data.vegState}`;
+                // let vegType = JSON.stringify(data.vegSelector);
+                // let vegId = vegType.slice(1,3);
                 
-                if (data.vegSelector) {
-                    let queryStringProduce = `INSERT INTO fresh_produce (produce_name, farm_location, Amount_kg, produce_type_id) VALUES ('${data.vegName}', '${vegLocation}', '${data.vegAmount}', ${vegId})`;
+                let queryString = `INSERT INTO products (farmer_id, product_name) VALUES ('${data.vegID}', '${data.vegName}')`
+                connection.query(queryString, function(err, res) {
+                    if (err) throw err;
 
-                    connection.query(queryStringProduce, function(err, res) {
-                        if (err) throw err;
-
-                        console.log("Success");
-
-                        inquirer.prompt([
-                            {
-                                type: "list",
-                                name: "mainMenu",
-                                message: "Return to main menu or view produce",
-                                choices: 
-                                [
-                                    "View Produce",
-                                    "Main Menu"
-                                ]
-                            }
-                        ]).then(function(data) {
-                            if (data.mainMenu === "View Produce") return seeAll();
-                            if (data.mainMenu === "Main Menu") return mainMenu();
-                        });
+                    console.log("great");
+                    inquirer.prompt([
+                        {
+                            type: "list",
+                            name: "mainMenu",
+                            message: "Return to main menu or view produce",
+                            choices: 
+                            [
+                                "View Produce",
+                                "Main Menu"
+                            ],
+                        }
+                    ]).then(function(data) {
+                        if (data.mainMenu === "View Produce") return seeAll();
+                        if (data.mainMenu === "Main Menu") return mainMenu();
                     });
-                };
+                })
+
+                // if (data.vegSelector) {
+                //     let queryStringProduce = `INSERT INTO fresh_produce (produce_name, farm_location, Amount_kg, produce_type_id) VALUES ('${data.vegName}', '${vegLocation}', '${data.vegAmount}', ${vegId})`;
+
+                //     connection.query(queryStringProduce, function(err, res) {
+                //         if (err) throw err;
+
+                //         console.log("Success");
+
+                //         inquirer.prompt([
+                //             {
+                //                 type: "list",
+                //                 name: "mainMenu",
+                //                 message: "Return to main menu or view produce",
+                //                 choices: 
+                //                 [
+                //                     "View Produce",
+                //                     "Main Menu"
+                //                 ],
+                //             }
+                //         ]).then(function(data) {
+                //             if (data.mainMenu === "View Produce") return seeAll();
+                //             if (data.mainMenu === "Main Menu") return mainMenu();
+                //         });
+                //     });
+                // };
             });
         });  
     };
