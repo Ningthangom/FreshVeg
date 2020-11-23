@@ -1,9 +1,18 @@
-USE thjgsjh6mvck6pc7;
+DROP DATABASE IF EXISTS burgers_db;
 
+CREATE DATABASE burgers_db;
 
-CREATE TABLE farmer (
-    id INT NOT NULL AUTO_INCREMENT,
-    first_name VARCHAR(50) NOT NULL ,
-    last_name VARCHAR(50) NOT NULL,
+USE burgers_db;
+
+CREATE TABLE burgers (
+	id INT auto_increment NOT NULL,
+    burger_name VARCHAR(100) NOT NULL,
+    devoured BOOLEAN default FALSE,
     PRIMARY KEY (id)
-);
+    );
+    
+INSERT INTO burgers (burger_name, devoured)
+	VALUES 
+		('Sweet Home Avocado', false),
+		('Beet-er Believe It', false),
+        ('Eggslut', false);
