@@ -29,7 +29,8 @@ function run() {
                 choices: 
                 [
                     " --> See All Current Produce",
-                    " --> Update Current Produce Levels",
+                    " --> See All Farmers",
+                    " --> Add New Farmer",
                     " --> Add New Produce",
                     " --> Remove Obsolete or Depleted Produce",
                     " --> Exit"
@@ -37,7 +38,8 @@ function run() {
             }
         ]).then(function(data) {
             if (data.menu === " --> See All Current Produce") return seeAll();
-            if (data.menu === " --> Update Current Produce Levels") return updateLevels();
+            if (data.menu === " --> Add New Farmer") return addFarmer();
+            if (data.menu === " --> See All Farmers") return seeFarmer();
             if (data.menu === " --> Add New Produce") return addNew();
             if (data.menu === " --> Remove Obsolete or Depleted Produce") return removeDepleted();
             if (data.menu === " --> Exit") return exit();
@@ -80,77 +82,174 @@ function run() {
         });
     };
 
-    function updateLevels() {
-        connection.query(`SELECT * FROM products`, function(err, res) {
+    // function updateLevels() {
+    //     connection.query(`SELECT * FROM products`, function(err, res) {
+    //         if (err) throw err;
+
+    //         inquirer.prompt([
+    //             {
+    //                 type: "list",
+    //                 name: "produceSelection",
+    //                 message: "What would you like to update".green,
+    //                 choices: function() {
+    //                     let produceArray = [];
+    //                     let currentProduce = [];
+    //                     for (let i = 0; i < res.length; i++) {
+    //                         console.log(res[i]);
+    //                         produceArray.push(`ID ${res[i].id} : ${res[i].produce_name.green}`);
+    //                         currentProduce.push(res[i]);
+                            
+    //                     };
+    //                     return produceArray;
+    //                 }
+    //             }
+    //         ]).then(function(data) {
+    //             let newAmount = JSON.stringify(data);
+    //             let amountString = newAmount.slice(23,26).toLowerCase();
+
+    //             if (data.produceSelection) {
+    //                 inquirer.prompt([
+    //                     {
+    //                         type: "input",
+    //                         name: "newAmount",
+    //                         message: "What is the new price per KG?"
+    //                     },
+    //                     {
+    //                         type: "list",
+    //                         name: "confirm",
+    //                         message: "Confirm?",
+    //                         choices: ["Yes", "No", "Exit"]
+    //                     }
+    //                 ]).then(function(data) {
+                        
+    //                     if (data.confirm === "No") return updateLevels();
+    //                     if (data.confirm === "Exit") return mainMenu();
+    //                     if (data.confirm === "Yes") {
+    //                         connection.query(`UPDATE products SET price_kg = ${data.newAmount} WHERE id = ${amountString}`, 
+    //                         function(err, res) {
+    //                             if (err) throw err;
+
+    //                             console.log("Success");
+
+    //                             inquirer.prompt([
+    //                                 {
+    //                                     type: "list",
+    //                                     name: "mainMenu",
+    //                                     message: "Return to main menu or view produce",
+    //                                     choices: 
+    //                                     [
+    //                                         "View Produce",
+    //                                         "Main Menu"
+    //                                     ]
+    //                                 }
+    //                             ]).then(function(data) {
+    //                                 if (data.mainMenu === "View Produce") return seeAll();
+    //                                 if (data.mainMenu === "Main Menu") return mainMenu();
+    //                             })
+    //                         })
+    //                     }
+    //                 })
+    //             }
+    //         })
+    //     });  
+    // };
+
+    function addFarmer() {
+        inquirer.prompt([
+            {
+                type: "input",
+                name: "firstName",
+                message: "What is your first name?"
+            },
+            {
+                type: "input",
+                name: "lastName",
+                message: "What is your last name?"
+            }
+        ]).then(function(data) {
+            let queryString = `INSERT INTO farmer (first_name, last_name) VALUES ('${data.firstName}', '${data.lastName}')`;
+
+            connection.query(queryString, function(err, res) {
+                if (err) throw err;
+
+                
+                return console.log(`${data.firstName} ${data.lastName} Added Successfully`);
+                inquirer.prompt([
+                            {
+                                type: "list",
+                                name: "mainMenu",
+                                message: "Return to main menu or view produce",
+                                choices: 
+                                    [
+                                        "View Produce",
+                                        "Main Menu"
+                                    ]
+                            }
+                ]).then(function(data) {
+                    if (data.mainMenu === "View Produce") return seeAll();
+                    if (data.mainMenu === "Main Menu") return mainMenu();
+                })
+            })
+        })
+    }
+
+    function seeFarmer() {
+        connection.query("SELECT * FROM farmer", function (err, res) {
             if (err) throw err;
 
             inquirer.prompt([
                 {
                     type: "list",
-                    name: "produceSelection",
-                    message: "What would you like to update".green,
+                    name: "farmerSelect",
+                    message: "View Farmer Details".green,
                     choices: function() {
-                        let produceArray = [];
-                        let currentProduce = [];
+                        let farmerArray = [];
                         for (let i = 0; i < res.length; i++) {
-                            console.log(res[i]);
-                            produceArray.push(`ID ${res[i].id} : ${res[i].produce_name.green}`);
-                            currentProduce.push(res[i]);
                             
+                            farmerArray.push(`ID ${res[i].id} : ${res[i].first_name.green} ${res[i].last_name.green}`);
+                                        
                         };
-                        return produceArray;
+                    return farmerArray;
                     }
+                },
+                {
+                    type: "list",
+                    name: "mainMenu",
+                    message: "Return to main menu or view produce",
+                    choices: 
+                            [
+                                "View Produce",
+                                "Main Menu"
+                            ]
                 }
             ]).then(function(data) {
-                let newAmount = JSON.stringify(data);
-                let amountString = newAmount.slice(23,26).toLowerCase();
+                if (data.farmerSelect) {
+                    
+                    let newString = JSON.stringify(data);
 
-                if (data.produceSelection) {
+                    console.table(newString);
+
                     inquirer.prompt([
                         {
-                            type: "input",
-                            name: "newAmount",
-                            message: "What is the new price per KG?"
-                        },
-                        {
                             type: "list",
-                            name: "confirm",
-                            message: "Confirm?",
-                            choices: ["Yes", "No", "Exit"]
+                            name: "mainMenu",
+                            message: "Return to main menu or view produce",
+                            choices: 
+                                [
+                                    "View Produce",
+                                    "Main Menu"
+                                ]
                         }
                     ]).then(function(data) {
-                        
-                        if (data.confirm === "No") return updateLevels();
-                        if (data.confirm === "Exit") return mainMenu();
-                        if (data.confirm === "Yes") {
-                            connection.query(`UPDATE products SET price_kg = ${data.newAmount} WHERE id = ${amountString}`, 
-                            function(err, res) {
-                                if (err) throw err;
-
-                                console.log("Success");
-
-                                inquirer.prompt([
-                                    {
-                                        type: "list",
-                                        name: "mainMenu",
-                                        message: "Return to main menu or view produce",
-                                        choices: 
-                                        [
-                                            "View Produce",
-                                            "Main Menu"
-                                        ]
-                                    }
-                                ]).then(function(data) {
-                                    if (data.mainMenu === "View Produce") return seeAll();
-                                    if (data.mainMenu === "Main Menu") return mainMenu();
-                                })
-                            })
-                        }
+                        if (data.mainMenu === "View Produce") return seeAll();
+                        if (data.mainMenu === "Main Menu") return mainMenu();
                     })
-                }
+                };
+                if (data.mainMenu === "View Produce") return seeAll();
+                if (data.mainMenu === "Main Menu") return mainMenu();
             })
-        });  
-    };
+        })
+    }
 
     function addNew() {
         let queryString = "SELECT id, product_name FROM products";
