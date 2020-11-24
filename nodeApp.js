@@ -33,6 +33,7 @@ function run() {
                     " --> Add New Farmer",
                     " --> Add New Produce",
                     " --> Remove Obsolete or Depleted Produce",
+                    " --> Rmove Farmers",
                     " --> Exit"
                 ]
             }
@@ -40,8 +41,9 @@ function run() {
             if (data.menu === " --> See All Current Produce") return seeAll();
             if (data.menu === " --> Add New Farmer") return addFarmer();
             if (data.menu === " --> See All Farmers") return seeFarmer();
-            if (data.menu === " --> Add New Produce") return addNew();
-            if (data.menu === " --> Remove Obsolete or Depleted Produce") return removeDepleted();
+            if (data.menu === " --> Add New Produce") return addProduct();
+            if (data.menu === " --> Remove Obsolete or Depleted Produce") return removeProduce();
+            if (data.menu === " --> Rmove Farmers") return removeFarmer();
             if (data.menu === " --> Exit") return exit();
         }).catch(err => {
             return err;
@@ -173,7 +175,7 @@ function run() {
                 if (err) throw err;
 
                 
-                return console.log(`${data.firstName} ${data.lastName} Added Successfully`);
+                console.log(`${data.firstName} ${data.lastName} Added Successfully`);
                 inquirer.prompt([
                             {
                                 type: "list",
@@ -251,10 +253,12 @@ function run() {
         })
     }
 
-    function addNew() {
+    function addProduct() {
         let queryString = "SELECT id, product_name FROM products";
         connection.query(queryString, function(err, res) {
             if (err) throw err;
+
+            let farmerString = `SELECT * from farmer`;
 
             inquirer.prompt([
                 // {
@@ -276,23 +280,22 @@ function run() {
                     message: "What are you adding?" 
                 },
                 {
-                    type: "input",
-                    name: "vegID",
-                    message: "Whats your farmer ID?"
-                },
-                {
                     type: "list",
-                    name: "vegState",
-                    message: "What state is your farm in?",
+                    name: "vegFarmer",
+                    message: "Which farmer does this produce belong too?",
                     choices: [
-                        "QLD",
-                        "NSW",
-                        "VIC",
-                        "SA",
-                        "NT",
-                        "WA",
-                        "TAS",
-                        "ACT"
+                        connection.query(farmerString, function(err, res) {
+                            if (err) throw err;
+
+                            let farmerArray = [];
+                            for (let i = 0; i < res.length; i++) {
+                                
+                                farmerArray.push(`${res[i].id} ${res[i].last_name}`);
+                            };
+                            return farmerArray;
+                            
+                        })
+                        
                     ]
                 },
                 {
@@ -302,9 +305,6 @@ function run() {
                 }
             ]).then(function(data) {
                 console.log(data);
-                // let vegLocation = `${data.vegFarm} ${data.vegState}`;
-                // let vegType = JSON.stringify(data.vegSelector);
-                // let vegId = vegType.slice(1,3);
                 
                 let queryString = `INSERT INTO products (farmer_id, product_name) VALUES ('${data.vegID}', '${data.vegName}')`
                 connection.query(queryString, function(err, res) {
@@ -357,7 +357,7 @@ function run() {
         });  
     };
 
-    function removeDepleted() {
+    function removeProduce() {
         let queryString = "SELECT id, produce_name FROM fresh_produce";
         connection.query(queryString, function(err, res) {
             if (err) throw err;
