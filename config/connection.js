@@ -20,6 +20,10 @@ connection.connect(function(err) {
     console.log(`Connected as id ${connection.threadId}`);
 }); */
  
+
+// ========================================================================
+
+
  // Dependencies
 var Sequelize = require("sequelize");
 
