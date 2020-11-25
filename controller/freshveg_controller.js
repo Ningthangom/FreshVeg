@@ -4,6 +4,12 @@ const express = require("express");
 
 const router = express.Router();
 
+const { Op } = require("sequelize");
+
+let Farmer = require("../models/farmers");
+
+let products = require("../models/products");
+
 // *********************************************************************************
 // html-routes.js - this section offers a set of routes for sending users to the various html pages
 // *********************************************************************************
@@ -35,6 +41,31 @@ router.get("/farmer/addvege", function(req, res) {
 
 // API Routes
 // =====================================================
+router.get("/api/farmer"), (req,res) => {
+    // api get request to call in farmer table information to create info cards
+    Farmer.findAll({}).then((results) => {
+        res.json(results)
+    })
+}
+// sending the farmer.products data related to the specific farmer...
+router.get("/api/farmer/vegetable", (req, res) => {
+
+    // sequalize query to call the produce the farmer is selling.
+    products.findAll({
+        where: {
+            [Op.and]: {
+                farmer_id: req.params.farmer_id,
+                product_availability: true,
+            }
+        }
+    }).then((results) =>{
+        res.json(results)
+    })
+})
+
+//adding a vegetable or other data
+
+
 
 module.exports = router;
 
