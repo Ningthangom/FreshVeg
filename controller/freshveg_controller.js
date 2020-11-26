@@ -6,19 +6,28 @@ const router = express.Router();
 
 const { Op } = require("sequelize");
 
-let Farmer = require("../models/farmers");
+let farmers = require("../models/farmers.js");
 
 let products = require("../models/products");
 
 // *********************************************************************************
 // html-routes.js - this section offers a set of routes for sending users to the various html pages
 // *********************************************************************************
-router.get("/", (req, res) => {
-    let vegetableObject = {
-        sellerMessage: "Would you like to buy my Vegetables?",
-        forSale: ["turnip", "bunyip", "whipyip"]
+// route for an individual farmer's page
+router.get("/farmers", async (req, res , next) =>{
+    const id = req.params.id;
+    try {
+        const farmer = await farmers.findById(id);
+        if (!farmer){
+            throw createError(404, 'farmer does not exist');
+
+        }
+        res.send(farmer);
+
+    }catch(error) {
+        console.log(error.message);
+
     }
-    res.render("index", vegetableObject)
 });
 
 //Additional routes for other pages
@@ -43,7 +52,7 @@ router.get("/farmer/addvege", function(req, res) {
 // =====================================================
 router.get("/api/farmer"), (req,res) => {
     // api get request to call in farmer table information to create info cards
-    Farmer.findAll({}).then((results) => {
+    farmers.findAll({}).then((results) => {
         res.json(results)
     })
 }
