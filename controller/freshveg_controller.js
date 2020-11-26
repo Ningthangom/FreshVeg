@@ -4,36 +4,76 @@ const express = require("express");
 
 const router = express.Router();
 
-const { Op } = require("sequelize");
+/* const { Op } = require("sequelize"); */
+/* const { sequelize } = require("../models"); */
 
-let farmers = require("../models/farmers.js");
-
-let products = require("../models/products");
+const db = require("../models");
+/* const farmers = require("../models/farmers.js"); */
 
 // *********************************************************************************
 // html-routes.js - this section offers a set of routes for sending users to the various html pages
 // *********************************************************************************
 // route for an individual farmer's page
-router.get("/farmers", async (req, res , next) =>{
-    const id = req.params.id;
-    try {
-        const farmer = await farmers.findById(id);
-        if (!farmer){
-            throw createError(404, 'farmer does not exist');
 
-        }
-        res.send(farmer);
 
-    }catch(error) {
-        console.log(error.message);
+ // route for an individual farmer's page
+ router.get("/farmer", (req, res) =>{
+     const farmer = db.farmer.findAll();
+     console.log(farmer);
+     console.log(db.farmer);
+    db.farmer.findAll().then(function(data) {
+            console.log(data);
+            var hdbrsObj = {
+              farmer: data
+            };
+            res.render("index", hdbrsObj);
+          });
+    });
+ 
+ 
 
-    }
-});
+/* 
+  // route for an individual farmer's page
+router.get("/farmer", (req, res) =>{
+    db.farmers.findAll({  
+        
+    attributes: ['id']
+
+})  sequelize.query("SELECT first_name last_name FROM farmer AS farmer").then(function(data) {
+            console.log(data); 
+            var hdbrsObj = {
+              farmers: data
+            };
+            console.log(hdbrsObj);
+            res.render("index", hdbrsObj);
+          });
+    })
+  */
+
+
 
 //Additional routes for other pages
 
+/* router.get("/farmer", (req, res) => {
+    try {
+        farmers.findAll({
+            attributes: ['first_name','last_name']
+        })
+        .then((farmerName) =>{
+            //Need to build an array somehow?
+            res.render("index", {
+                first_name: farmerName.first_name,
+                last_name:  farmerName.last_name,
+            })
+            console.log(farmers);
+        })
+    } catch (error) {
+        console.log(error)
+    }
+});
+ */
 // route for an individual farmer's page
-router.get("/farmer", (req, res) =>{
+router.get("/farmers", (req, res) =>{
     res.render("farmer")
 })
 

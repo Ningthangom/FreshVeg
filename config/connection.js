@@ -40,5 +40,6 @@ Sequelize("thjgsjh6mvck6pc7", "rcp5kgnzh5w2y4w4", "mr7txoqjdyittef0", {
   }
 });
 
+
 // Exports the connection for other files to use
-module.exports = sequelize; 
+module.exports = sequelize;  

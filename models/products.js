@@ -10,7 +10,7 @@ var sequelize = require("../config/connection.js");
 
 
 // Creates a "Chirp" model that matches up with DB
-var products = sequelize.define("product", {
+ var products = sequelize.define("product", {
     product_name: Sequelize.STRING,
     product_availability: Sequelize.BOOLEAN,
 
@@ -20,15 +20,15 @@ var products = sequelize.define("product", {
   products.sync();
 
 // Makes the Chirp Model available for other files (will also create a table)
-module.exports = products;
+module.exports = products; 
 
 
-
-// module.exports = function(sequelize, datatypes) {
-//   let products = sequelize.define("products", {
-//     product_name: datatypes.STRING,
-//     product_availability: datatypes.BOOLEAN,
-//     farmer_id: datatypes.INTEGER
-//   });
-//   return products;
-// }
+/* 
+ module.exports = function(sequelize, datatypes) {
+   let products = sequelize.define("products", {
+    product_name: datatypes.STRING,
+    product_availability: datatypes.BOOLEAN,
+     farmer_id: datatypes.INTEGER
+  });
+  return products;
+}  */
