@@ -17,7 +17,18 @@ const db = require("../models");
 const { Op } = require("sequelize");
 const products = require("../models/products");
 
-
+router.get("/", (req, res) =>{
+    const products = db.products.findAll();
+        console.log(products);
+        console.log(db.products);
+       db.products.findAll().then(function(data) {
+               console.log(data);
+               let hdbrsObj = {
+                products: data
+               };
+               res.render("vege", hdbrsObj);
+             });
+});
  // route for an individual farmer's page
  router.get("/farmer", (req, res) =>{
      const farmers = db.farmers.findAll();
@@ -32,24 +43,6 @@ const products = require("../models/products");
           });
     });
  
-
- router.get("/", (req, res) =>{
-    const products = db.products.findAll();
-        console.log(products);
-        console.log(db.products);
-       db.products.findAll().then(function(data) {
-               console.log(data);
-               let hdbrsObj = {
-                products: data
-               };
-               res.render("vege", hdbrsObj);
-             });
-       });
-
-
-
-
-
 router.get("/farmer/:sales", (req, res) =>{
     let vegeparameter =  req.params.sales
 
