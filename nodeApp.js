@@ -54,8 +54,6 @@ function run() {
     function checkProduce() {
         let queryString = "SELECT * FROM products";
 
-        console.log(queryString);
-
         connection.query(queryString, function(err, res) {
             if (err) throw err;
 
@@ -88,7 +86,6 @@ function run() {
                     choices: function() {
                         let farmerArray = [];
                         for (let i = 0; i < res.length; i++) {
-                            console.log(res[i]);
                             farmerArray.push(`${res[i].id} ${res[i].first_name} ${res[i].last_name}`);
                         }
                         return farmerArray;
@@ -103,9 +100,6 @@ function run() {
 
                 let priceKG = data.price;
 
-                console.log(vegStringNoQuotes)
-
-                console.log(updateID);
                 let updateString = `INSERT INTO products (product_name, price_kg, product_availability, farmers_id) VALUES ('${vegStringNoQuotes}', ${priceKG}, true, ${updateID})`;
                 connection.query(updateString, function(err, res) {
                     if (err) throw err;
@@ -149,8 +143,6 @@ function run() {
                 if (data.confirm === "Yes") {
                     let deleting = JSON.stringify(data.veggies);
                     let noMoreVeggies = deleting.replace(/[a-zA-Z'"]/g, '');
-
-                    console.log(noMoreVeggies);
 
                     let removeString = `DELETE FROM products WHERE id = '${noMoreVeggies}'`;
                     connection.query(removeString, function(err, res) {
