@@ -10,7 +10,7 @@ const exphbs = require("express-handlebars");
 const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
 
 const PORT = process.env.PORT || 3001;
-
+/*  */
 const app = express();
 //serve static contetnt for the app from the public directory.
 //using/accessing routes file
@@ -38,6 +38,7 @@ app.use(routes);
     // Log (server-side) when our server has started
     console.log(`Server listening on: http://localhost:${PORT}`);
   });
+  
 //});
 
 

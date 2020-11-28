@@ -16,15 +16,16 @@ const db = require("../models");
 // route for an individual farmer's page
 
 
+
  // route for an individual farmer's page
  router.get("/farmer", (req, res) =>{
-     const farmer = db.farmer.findAll();
-     console.log(farmer);
-     console.log(db.farmer);
-    db.farmer.findAll().then(function(data) {
+     const farmers = db.farmers.findAll();
+     console.log(farmers);
+     console.log(db.farmers);
+    db.farmers.findAll().then(function(data) {
             console.log(data);
             var hdbrsObj = {
-              farmer: data
+              farmers: data
             };
             res.render("index", hdbrsObj);
           });
