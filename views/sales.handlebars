@@ -1,0 +1,72 @@
+<link rel="stylesheet" href="/assets/css/sale.css">
+    <div class="container contain">
+        <div class="row">
+          <div class="col-sm">
+           <h1>BUSINESS NAME: JOHN PTY LTD</h1>
+          </div>
+        </div>
+    </div>
+
+    <div class="container contain1">
+        <div class="row">
+          <div class="col-sm">
+           <h1>{{product_name}}</h1>
+          </div>
+          <div class="col-sm">
+            <h2>Price</h2>
+            <button class="btn bg-primary">{{sales.total_price}}/kg</button>
+          </div>
+        </div>
+    </div>
+    <div class="container contain2">
+        <div class="row">
+          <div class="col-sm">
+           <h3 id = "quantityInput">Quantity in Kg</h3>
+          </div>
+          <div class="col-sm">
+            <form>
+                <div class="form-group quantityInput">
+                  <label for="formGroupExampleInput"></label>
+                  <input type="number" class="form-control" id="formGroupExampleInput" placeholder="12">
+                </div>
+              </form>
+          </div>
+        </div>
+    </div>
+    <div class="container contain3">
+        <div class="row">
+          <div class="col-sm">
+           <h3>orfer Price per Kg</h3>
+           <span>must be the same as the market price or higher</span>
+          </div>
+          <div class="col-sm">
+                <div class="input-group mb-3 priceInput">
+                    <div class="input-group-prepend">
+                    <span class="input-group-text">$</span>
+                    </div>
+                    <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                    <div class="input-group-append">
+                    <span class="input-group-text">.00</span>
+                    </div>
+                </div>
+          </div>
+        </div>
+    </div>
+    <div class="container contain4">
+        <div class="row">
+          <div class="col-sm">
+           <h3>The date to be delivered</h3>
+          </div>
+          <div class="col-sm">
+                <div class="form-group row">
+                  <!--   <label for="example-date-input" class="col-2 col-form-label"></label> -->
+                    <div class="col-10 dateInput">
+                        <input class="form-control" type="date" value="2011-08-19" id="example-date-input">
+                    </div>
+                </div>
+          </div>
+        </div>
+    </div>
+    <div>
+        <button type="button" class="btn btn-primary" id= "checkoutbtn">Order</button>
+    </div>

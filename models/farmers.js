@@ -1,7 +1,6 @@
 // Dependencies
 // =============================================================
 
-const products = require("./products");
 
 // This may be confusing but here Sequelize (capital) references the standard library
  // var Sequelize = require("sequelize");
@@ -20,10 +19,6 @@ var farmers = sequelize.define("farmers", {
 // Makes the Chirp Model available for other files (will also create a table)
 //foreignKey declaration products to farmers
 
-farmers.hasMany(products, {
-  foreignKey: 'farmer_id'
-});
-products.belongsTo(farmers);
 
 
 module.exports = farmers;

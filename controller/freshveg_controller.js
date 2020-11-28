@@ -14,7 +14,8 @@ const db = require("../models");
 // html-routes.js - this section offers a set of routes for sending users to the various html pages
 // *********************************************************************************
 // route for an individual farmer's page
-
+const { Op } = require("sequelize");
+const products = require("../models/products");
 
 
  // route for an individual farmer's page
@@ -24,13 +25,53 @@ const db = require("../models");
      console.log(db.farmers);
     db.farmers.findAll().then(function(data) {
             console.log(data);
-            var hdbrsObj = {
+            let hdbrsObj = {
               farmers: data
             };
             res.render("index", hdbrsObj);
           });
     });
  
+
+ router.get("/", (req, res) =>{
+    const products = db.products.findAll();
+        console.log(products);
+        console.log(db.products);
+       db.products.findAll().then(function(data) {
+               console.log(data);
+               let hdbrsObj = {
+                products: data
+               };
+               res.render("vege", hdbrsObj);
+             });
+       });
+
+
+
+
+
+router.get("/farmer/:sales", (req, res) =>{
+    let vegeparameter =  req.params.sales
+
+        db.sales.findOne({
+            where:{     
+                
+            },include: {model:products,
+                where:{
+                    product_name: vegeparameter
+                }
+            }
+        }).then(function(data) {
+             console.log(data);
+             let vegeUppercase = vegeparameter.toUpperCase();
+             let hdbrsObj = {
+             sales: data,
+             product_name: vegeUppercase
+             };
+            res.render("sales", hdbrsObj);
+        });
+});
+    
  
 
 /* 
