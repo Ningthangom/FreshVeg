@@ -54,10 +54,12 @@ function run() {
     function checkProduce() {
         let queryString = "SELECT * FROM products";
 
+        console.log(queryString);
+
         connection.query(queryString, function(err, res) {
             if (err) throw err;
 
-            console.log(`** PRODUCT AVAILABILITY, 1 = available -- 0 = not available **`.magenta);
+            console.log(`** PRODUCT AVAILABILITY || 1 = available || 0 = not available || **`.magenta);
             console.table(res);
             
             return subMenu();
@@ -67,7 +69,7 @@ function run() {
     
     // Add produce to product table
     function addProduce() {
-        connection.query(`SELECT * FROM farmer`, function(err, res) {
+        connection.query(`SELECT * FROM farmers`, function(err, res) {
             inquirer.prompt([
                 {
                     type: "input",
@@ -75,9 +77,14 @@ function run() {
                     message: "What would you like to add?"
                 },
                 {
+                    type: "number",
+                    name: "price",
+                    message: "Price per KG?"
+                },
+                {
                     type: "list",
                     name: "selectFarmer",
-                    message: "Select your Farmer-ID",
+                    message: "Select your Farmers-ID",
                     choices: function() {
                         let farmerArray = [];
                         for (let i = 0; i < res.length; i++) {
@@ -92,10 +99,14 @@ function run() {
                 let updateID = farmerID.slice(0,2);
 
                 let vegString = JSON.stringify(data.newVeg);
-                let vegStringNoQuotes = vegString.replace(/['"]+/g, '');
+                let vegStringNoQuotes = vegString.replace(/['"]+/g, '').toUpperCase();
+
+                let priceKG = data.price;
+
+                console.log(vegStringNoQuotes)
 
                 console.log(updateID);
-                let updateString = `INSERT INTO products (product_name, product_availabilty, farmer_id) VALUES ('${vegStringNoQuotes}', true, ${updateID})`;
+                let updateString = `INSERT INTO products (product_name, price_kg, product_availability, farmers_id) VALUES ('${vegStringNoQuotes}', ${priceKG}, true, ${updateID})`;
                 connection.query(updateString, function(err, res) {
                     if (err) throw err;
 
@@ -156,7 +167,7 @@ function run() {
 
     // View table of farmers
     function seeFarmers() {
-        let queryString = "SELECT * FROM farmer";
+        let queryString = "SELECT id, first_name, last_name FROM farmers";
 
         connection.query(queryString, function(err, res) {
             if (err) throw err;
@@ -181,7 +192,7 @@ function run() {
                 message: "What is your last name?"
             }
         ]).then(function(data) {
-            let queryString = `INSERT INTO farmer (first_name, last_name) VALUES ('${data.firstName}', '${data.lastName}')`;
+            let queryString = `INSERT INTO farmers (first_name, last_name) VALUES ('${data.firstName}', '${data.lastName}')`;
 
             connection.query(queryString, function(err, res) {
                 if (err) throw err;
@@ -209,7 +220,7 @@ function run() {
 
     // Remove farmers from database (BE CAREFUL)
     function removeFarmers() {
-        let removalString = `SELECT * FROM farmer`
+        let removalString = `SELECT * FROM farmers`
         connection.query(removalString, function(err, res) {
             if (err) throw err;
 
@@ -236,7 +247,7 @@ function run() {
                 let farmer = JSON.stringify(data.farmers);
                 let farmerID = farmer.replace(/[^0-9 ]/g, "");
                 let farmerName = farmer.replace(/[^a-zA-Z ]/g, "");
-                let deleteFarmerString = `DELETE FROM farmer WHERE id = ${farmerID}`;
+                let deleteFarmerString = `DELETE FROM farmers WHERE id = ${farmerID}`;
 
                 if (data.confirm === "No") return mainMenu();
                 if (data.confirm === "Yes") {
