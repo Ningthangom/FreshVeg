@@ -27,10 +27,10 @@
     "mysql": "^2.18.1",
     "mysql2": "^2.2.5",
     "path": "^0.12.7",
-    "sequelize": "^4.41.2",
+    "sequelize": "^6.3.5",
     "server.js": "^1.0.0"
   },
   "devDependencies": {
-    "handlebars": "^4.5.0"
+    "handlebars": "^4.7.6"
   }
 }
