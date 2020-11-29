@@ -5,7 +5,7 @@ var sequelize = require("../config/connection.js");
 const {DataTypes} = require('sequelize');
 const products = require("./products.js");
 const farmers = require("./farmers.js");
-// Creates a "Chirp" model that matches up with DB
+// Creates a "sales" model that matches up with DB
 var sales = sequelize.define("sales", {
 
     total_price: DataTypes.DECIMAL,
@@ -18,13 +18,6 @@ sales.belongsTo(products,{
 sales.belongsTo(farmers,{
     foreignKey:"farmers_id"
 })
-
-// Syncs with DB
-/* farmer.sync(); */
-
-// Makes the Chirp Model available for other files (will also create a table)
-//foreignKey declaration products to farmers
-
 
 
 module.exports = sales;

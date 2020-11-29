@@ -4,11 +4,8 @@ const express = require("express");
 
 const router = express.Router();
 
-/* const { Op } = require("sequelize"); */
-/* const { sequelize } = require("../models"); */
-
 const db = require("../models");
-/* const farmers = require("../models/farmers.js"); */
+
 
 // *********************************************************************************
 // html-routes.js - this section offers a set of routes for sending users to the various html pages
@@ -21,10 +18,10 @@ const products = require("../models/products");
  // route for an individual farmer's page
  router.get("/farmer", (req, res) =>{
      const farmers = db.farmers.findAll();
-     console.log(farmers);
-     console.log(db.farmers);
+ /*     console.log(farmers);
+     console.log(db.farmers); */
     db.farmers.findAll().then(function(data) {
-            console.log(data);
+           /*  console.log(data); */
             let hdbrsObj = {
               farmers: data
             };
@@ -35,10 +32,10 @@ const products = require("../models/products");
 
  router.get("/", (req, res) =>{
     const products = db.products.findAll();
-        console.log(products);
-        console.log(db.products);
+    /*     console.log(products);
+        console.log(db.products); */
        db.products.findAll().then(function(data) {
-               console.log(data);
+            /*    console.log(data); */
                let hdbrsObj = {
                 products: data
                };
@@ -62,7 +59,7 @@ router.get("/farmer/:sales", (req, res) =>{
                 }
             }
         }).then(function(data) {
-             console.log(data);
+            /*  console.log(data); */
              let vegeUppercase = vegeparameter.toUpperCase();
              let hdbrsObj = {
              sales: data,
@@ -72,48 +69,8 @@ router.get("/farmer/:sales", (req, res) =>{
         });
 });
     
+
  
-
-/* 
-  // route for an individual farmer's page
-router.get("/farmer", (req, res) =>{
-    db.farmers.findAll({  
-        
-    attributes: ['id']
-
-})  sequelize.query("SELECT first_name last_name FROM farmer AS farmer").then(function(data) {
-            console.log(data); 
-            var hdbrsObj = {
-              farmers: data
-            };
-            console.log(hdbrsObj);
-            res.render("index", hdbrsObj);
-          });
-    })
-  */
-
-
-
-//Additional routes for other pages
-
-/* router.get("/farmer", (req, res) => {
-    try {
-        farmers.findAll({
-            attributes: ['first_name','last_name']
-        })
-        .then((farmerName) =>{
-            //Need to build an array somehow?
-            res.render("index", {
-                first_name: farmerName.first_name,
-                last_name:  farmerName.last_name,
-            })
-            console.log(farmers);
-        })
-    } catch (error) {
-        console.log(error)
-    }
-});
- */
 // route for an individual farmer's page
 router.get("/farmers", (req, res) =>{
     res.render("farmer")
@@ -155,8 +112,6 @@ router.get("/api/farmer/vegetable", (req, res) => {
 })
 
 //adding a vegetable or other data
-
-
 
 module.exports = router;
 
