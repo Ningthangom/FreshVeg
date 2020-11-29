@@ -1,31 +1,44 @@
 
      <link rel="stylesheet" href="/assets/css/vege.css">
 
-  
-        <div class="row">
-        {{#each products}}
-          {{#if product_availability}}
-            <section class="card" style="width: 18 rem; border: 1%;">
+    <div class="row justify-content-center">
+      <section class="vegetable-section p-5">
+        <div class="headline">
+          <h1 class="veg-head display-1 pt-3">fresh veg</h1>
 
-                <article class="card-body">
-                    <h5 class="card-title">
-                        <!--Accessing Farmer company name{{company}}-->
-                
-                    </h5>
-                        <p class="card-text">
-                            {{this.product_name}}
-                        
-                        </p>
-                        <a href="farmer" class="btn btn-primary">
-                          {{!--   {{brand_name}} --}}
-                          view businesses
-                           
-                        </a>
-                </article>
-            </section>
-          {{/if}}
-         {{/each}}
+          <p class="veg-p lead pt-4">A place to get the freshest produce, picked fresh and delivered to you!</p>
         </div>
+      </section>
 
+      <section class="card-section p-3">
+        <div class="col-12 column-veg">
+          <div class="vege-row row justify-content-center">
+          {{#each products}}
+            {{#if product_availability}}
+              <section class="card veg-card">
 
+                  <article class="card-body">
+                      <h3 class="card-title">
+                        <!--Accessing Farmer company name{{company}}-->
+                        {{this.product_name}}
+                      </h3>
+                          <p class="card-text lead">
+                              View Businesses!
+                          </p>
+                          <p class="card-text">
+                            Check who's growing!
+                          </p>
+                          <button href="farmer" class="btn mt-3 btn-outline-light">
+                            {{!--   {{brand_name}} --}}
+                            Check Growers!
+                          </button>
+                  </article>
+              </section>
+            {{/if}}
+          {{/each}}
+          </div>
+        </div>
+      </section>
+
+      </div>
     </div>

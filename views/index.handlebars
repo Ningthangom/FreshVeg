@@ -1,12 +1,22 @@
-
+<link rel="stylesheet" href="/assets/css/index.css">
     <!--First Row of the layout for Headline and other things-->
-<div class= "row">
+<div class= "row justify-content-center">
     <!--main content and layout of the page listing different farmers and or vegetables-->
 
     <!--Aside/Navbar-->
-        <aside class="col-sm-2">
+        {{!-- <aside class="col-sm-2">
 
-        </aside>
+        </aside> --}}
+
+{{!-- Main heading of the page --}}
+    <section class="vegetable-section p-5">
+        <div class="headline">
+          <h1 class="veg-head display-3 pt-3">See the Growers</h1>
+
+          <p class="veg-p lead pt-4">Meet the local farmers and see what they're growing right now!</p>
+        </div>
+    </section>
+
         <!--Use a card tempalte in partials to load in cards for each farmers, not sure how this would look on the page but we can try and attempt it will need to look into partials to do it sucessfully-->
         <div class="row">
         {{#each farmers}}

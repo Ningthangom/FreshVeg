@@ -1,0 +1,23 @@
+.card {
+    margin: 2rem;
+    border: solid  #f7f7f7;
+    background-color: #12A667;
+    color: white;
+    width: 18.75rem; 
+    border: 1%;
+}
+
+.vegetable-section {
+    padding: 0 5em 0 5em;
+    margin-right: 0 !important;
+}
+
+.veg-head {
+    font-weight: bold;
+    color: #f2644b;
+}
+
+.veg-p {
+    font-weight: bolder;
+    color: #f2644b;
+}
