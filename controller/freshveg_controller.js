@@ -6,6 +6,8 @@ const router = express.Router();
 
 const db = require("../models");
 
+const {rando, randoSequence} = require('@nastyox/rando.js');
+
 
 // *********************************************************************************
 // html-routes.js - this section offers a set of routes for sending users to the various html pages
@@ -33,8 +35,10 @@ router.get("/", (req, res) =>{
      console.log(db.farmers); */
     db.farmers.findAll().then(function(data) {
            /*  console.log(data); */
+           let vegeName = randomVege();
             let hdbrsObj = {
-              farmers: data
+              farmers: data,
+              produce_name: vegeName
             };
             res.render("index", hdbrsObj);
           });
@@ -69,6 +73,29 @@ router.get("/api/farmer"), (req,res) => {
     farmers.findAll({}).then((results) => {
         res.json(results)
     })
+}
+
+randomVege = () => {
+    
+    let vegeList = db.products.findAll({
+        attributes: product_name,
+    })
+    console.log(vegeList)
+    //conversion to an object or array?
+
+    let vegeArray = []
+    // for loop to push vegelist into an array
+    for (let i = 0; i < vegeList.length; i++) {
+        let produceItem = vegeList[i];
+        vegeArray.push(produceItem);
+    }
+    console.log(vegeArray)
+
+    //randomised vege Value
+    let selector = rando(0, vegeList.length)
+    let selectedVege = vegeArray[selector]
+
+    return selectedVege
 }
 
 module.exports = router;
