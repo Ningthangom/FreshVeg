@@ -27,7 +27,7 @@ app.set("view engine", "handlebars");
 
 
 //Routes importing and usage
-const routes = require("./controller/freshveg_controller");
+const routes = require("./controller/freshveg_controller.js");
 
 let db = require("./models");
 

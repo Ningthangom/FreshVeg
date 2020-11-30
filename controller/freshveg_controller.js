@@ -30,16 +30,22 @@ router.get("/", (req, res) =>{
 });
  // route for an individual farmer's page
  router.get("/farmer", (req, res) =>{
-     const farmers = db.farmers.findAll();
+/*      const farmers = db.farmers.findAll(); */
  /*     console.log(farmers);
      console.log(db.farmers); */
     db.farmers.findAll().then(function(data) {
            /*  console.log(data); */
-           let vegeName = randomVege();
+           let vegeArray = ['tomato','potato','onion','brocoli','pineapple','avocado','mango','banana','pomegranate'];
+
+           //randomised vege Value
+           let selector = rando(0, (vegeArray.length-1))
+           let selectedVege = vegeArray[selector]
             let hdbrsObj = {
               farmers: data,
-              produce_name: vegeName
+              product_name: selectedVege
             };
+
+
             res.render("index", hdbrsObj);
           });
     });
@@ -75,28 +81,6 @@ router.get("/api/farmer"), (req,res) => {
     })
 }
 
-randomVege = () => {
-    
-    let vegeList = db.products.findAll({
-        attributes: product_name,
-    })
-    console.log(vegeList)
-    //conversion to an object or array?
-
-    let vegeArray = []
-    // for loop to push vegelist into an array
-    for (let i = 0; i < vegeList.length; i++) {
-        let produceItem = vegeList[i];
-        vegeArray.push(produceItem);
-    }
-    console.log(vegeArray)
-
-    //randomised vege Value
-    let selector = rando(0, vegeList.length)
-    let selectedVege = vegeArray[selector]
-
-    return selectedVege
-}
 
 module.exports = router;
 
