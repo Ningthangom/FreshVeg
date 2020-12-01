@@ -14,9 +14,7 @@ $(document).ready(function() {
             },
           }).then(function(res, data) {
               console.log(`New farmer ${res} added!`);
-<<<<<<< HEAD
               swal(`New Farmer Added`, `Thank you`, "success");
-=======
 
             //clear input fields
             clearForm();
@@ -24,7 +22,6 @@ $(document).ready(function() {
               //notify user if successful
               alert(`Successfully added ${res} to the database`);
               
->>>>>>> 3ad3d61f35058dcd00350d36ee98d49e29825e89
           })
         } catch (error) {
             throw error;
