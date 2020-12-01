@@ -1,40 +1,38 @@
 // const { default: swal } = require("sweetalert");
 
+// const { default: swal } = require("sweetalert");
+
+// const { default: swal } = require("sweetalert");
+
+// const { default: swal } = require("sweetalert");
+
 $(document).ready(function() {
 
     $("#submitBtn").on('click', function(event) {
         event.preventDefault();
-        //statement check to ensure fields are empty, both need to be filled
-        try {
-        $.ajax("/api/addvege", {
-            type: 'POST',
-            data: {
-                firstName: $("#first_name").val().trim(),
-                lastName: $("#last_name").val().trim()
-            },
-          }).then(function(res, data) {
-              console.log(`New farmer ${res} added!`);
-              swal(`New Farmer Added`, `Thank you`, "success");
 
-            //clear input fields
-            clearForm();
-              
-              //notify user if successful
-              alert(`Successfully added ${res} to the database`);
-              
-          })
-        } catch (error) {
-            throw error;
+        if (($("#first_name").val().length == 0) || ($("#last_name").val().length == 0)) {
+            swal("Sorry", "Not a valid input", "warning");
+        } else {
+            try {
+                $.ajax("/api/addvege", {
+                    type: 'POST',
+                    data: {
+                        firstName: $("#first_name").val().trim(),
+                        lastName: $("#last_name").val().trim()
+                    },
+                  }).then(function(res, data) {
+                    console.log(res)
+                    swal(`New Farmer Added`, `Thank you`, "success");
+                  });
+            }catch (error) {
+                throw error;
+            }
         }
+
+        
+        
     });
-
-    clearForm = () => {
-        $("#first_name").replace($("#first_name").val(), '')
-
-        $("#last_name").replace($("#first_name").val(), '')  
-    }
-
-    
 
 });
 
