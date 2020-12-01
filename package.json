@@ -29,7 +29,8 @@
     "mysql2": "^2.2.5",
     "path": "^0.12.7",
     "sequelize": "^6.3.5",
-    "server.js": "^1.0.0"
+    "server.js": "^1.0.0",
+    "sweetalert": "^2.1.2"
   },
   "devDependencies": {
     "handlebars": "^4.7.6"
