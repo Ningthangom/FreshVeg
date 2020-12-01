@@ -1,64 +1,44 @@
+<link href="/assets/css/addvege.css" rel="stylesheet">
 
-  <div class="container">
-    <div class="jumbotron">
-      <h1>Fresh Veg Express (business name)</h1>
-      <h3>The greates FreshVeg Grown by the Greatest</h3>
-      <hr>
-      <a href="/" class="btn btn-danger btn-lg">
-        <span class="fa fa-eye"></span> Search vegetable</a>
-      <a href="/all" class="btn btn-danger btn-lg">
-        <span class="fa fa-th-list"></span> All vegetables</a>
-    </div>
-    <div class="row">
-
-      <div class="col-lg-12">
-
-        <div class="card">
-          <div class="card-header">
-            Add product
-          </div>
-          <div class="card-body">
-            <form action="" method="POST" role="form">
-
-              <div class="form-group">
-                <label for="">Name</label>
-                <input id="nameInput" type="text" class="form-control" placeholder="">
-              </div>
-
-          {{!--     <div class="form-group">
-                <label for="">shape (xl,l,b,s)</label>
-                <input type="text" class="form-control" id="role" placeholder="">
-              </div> --}}
-
-              <div class="form-group" >
-                <label for="">price</label>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">$</span>
-                    </div>
-                    <input id="priceInput" type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
-                    <div class="input-group-append">
-                      <span class="input-group-text">.00</span>
-                    </div>
-                  </div>
-              </div>
-
-            {{!--   <div class="form-group">
-                <label for="">Description</label>
-                <input type="text" class="form-control" id="force-points" placeholder="">
-              </div> --}}
-
-            </form>
-            <br>
-            <div class="text-right">
-              <button type="submit" class="btn btn-primary btn-md" id="add-btn">
-                <span class="fa fa-fire"></span> Add to the shop</button>
-            </div>
-          </div>
-        </div>
-
-      </div>
+<section class="login-page">
+  <div class="row">
+    <div class="column">
+      <h2 class="display-4">
+        Select Farmer
+      </h2>
+      <a href="farmer">
+        <button class="btn mt-3 btn-outline-light">
+          See All Current Farmers
+        </button>
+      </a>
+      <h2 class="display-4 text-muted">
+        Or Create a New One
+      </h2>
     </div>
   </div>
+  <div class="row">
+    <div class="column">
+      <form>
+        <div class="form-group">
+          <label for="first_name">First Name</label>
+          <input type="text" class="form-control" id="first_name" aria-describedby="first_name">
+          <small id="first_name" class="form-text text-muted">John</small>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Last Name</label>
+          <input type="text" class="form-control" id="last_name" aria-describedby="last_name">
+          <small id="last_name" class="form-text text-muted">Doe</small>
+        </div>
+        <button type="submit" id="submitBtn" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>
+</section>
 
-  <script src="js/add.js" type="text/javascript"></script>
+<script src="./assets/js/newfarmer.js"></script>
+
+
+
+  
+
+  

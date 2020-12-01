@@ -8,7 +8,8 @@ const db = require("../models");
 
 const {rando, randoSequence} = require('@nastyox/rando.js');
 
-
+const bodyParser = require('body-parser');
+router.use(bodyParser.json());
 // *********************************************************************************
 // html-routes.js - this section offers a set of routes for sending users to the various html pages
 // *********************************************************************************
@@ -54,7 +55,33 @@ router.get("/", (req, res) =>{
           });
     });
 
+router.get("/addvege", (req, res) => {
+    try {
 
+        db.farmers.findAll().then(function(data) {
+            let handlebarsObj = {
+                farmers: data,
+            }
+
+            res.render("addvege", handlebarsObj);
+        })
+        
+    } catch(error) {
+        res.status(500).send('Error, something is not working please try again.')
+    }
+});
+
+router.post("/api/addvege", (req, res) => {
+    
+    db.farmers.create({
+        first_name: req.body.firstName,
+        last_name: req.body.lastName
+    }).then(function(data) {
+        console.log(data);
+        res.sendStatus(200);
+    })
+    
+});
 
 
 router.get("/farmer/addvege", (req, res) =>{
@@ -64,7 +91,7 @@ router.get("/farmer/addvege", (req, res) =>{
                 res.status(500).send('Error, something is not working please try again.')
      }
     });
-    
+
  
 router.get("/farmer/:sales", (req, res) =>{
     let vegeparameter =  req.params.sales
